@@ -1,5 +1,6 @@
 #FROM public.ecr.aws/lambda/python:3.7
-FROM public.ecr.aws/lambda/python:3.11-arm64
+#FROM public.ecr.aws/lambda/python:3.11-arm64
+FROM public.ecr.aws/lambda/python:3.10-x86_64
 
 #Allow statements and logs messages to appear
 ENV PYTHONUNBUFFERED True

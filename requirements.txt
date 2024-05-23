@@ -3,6 +3,16 @@ mangum
 numpy
 requests
 uvicorn
+pandas
+scikit-learn
+argparse
+keras
+tensorflow
+xlrd
+openpyxl
+beautifulsoup4
+O365
+# ---------------------
 # fastapi==0.103.1
 # mangum==0.17.0
 # numpy==1.21.6
