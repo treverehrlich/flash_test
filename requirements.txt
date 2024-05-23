@@ -6,8 +6,8 @@ uvicorn
 pandas
 scikit-learn
 argparse
-keras
-#tensorflow
+#keras
+tensorflow
 xlrd
 openpyxl
 beautifulsoup4
