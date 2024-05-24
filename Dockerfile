@@ -11,14 +11,13 @@ RUN pip3 install --upgrade pip
 COPY requirements.txt . 
 RUN pip3 install -r requirements.txt --target ${LAMBDA_TASK_ROOT} -U --no-cache-dir --default-timeout=1000
 
-ARG AWS_ACCOUNT_ID
-ARG AWS_ECR_ACCESS_KEY_ID
-ARG AWS_ECR_SECRET_ACCESS_KEY
+# ARG AWS_ACCOUNT_ID
+# ARG AWS_ECR_ACCESS_KEY_ID
+# ARG AWS_ECR_SECRET_ACCESS_KEY
 ARG AWS_DEFAULT_REGION
 
 RUN echo "here it is..."
-RUN echo ${AWS_ACCOUNT_ID}
-RUN echo $AWS_ACCOUNT_ID
+RUN echo $AWS_DEFAULT_REGION
 
 RUN echo "attempting s3 copy"
 RUN aws s3 cp s3://aws-scs-prod-bucket/prod/avrl/pickle/ ${LAMBDA_TASK_ROOT}
