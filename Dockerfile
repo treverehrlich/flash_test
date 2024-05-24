@@ -10,7 +10,12 @@ ENV PYTHONUNBUFFERED True
 RUN pip3 install --upgrade pip
 
 RUN pip3 install awscli
-RUN aws --version
+RUN echo aws --version
+
+# RUN aws --version
+RUN echo "attempting s3 copy"
+RUN aws s3 cp s3://aws-scs-prod-bucket/prod/avrl/pickle/ ${LAMBDA_TASK_ROOT}
+RUN echo "I think we did it"
 
 COPY requirements.txt . 
 RUN pip3 install -r requirements.txt --target ${LAMBDA_TASK_ROOT} -U --no-cache-dir --default-timeout=1000
@@ -34,10 +39,7 @@ ENV AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
 # RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 # RUN	unzip awscliv2.zip && ./aws/install
 
-# RUN aws --version
-RUN echo "attempting s3 copy"
-RUN aws s3 cp s3://aws-scs-prod-bucket/prod/avrl/pickle/ ${LAMBDA_TASK_ROOT}
-RUN echo "I think we did it"
+
 
 
 # Copy project code
