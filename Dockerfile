@@ -13,13 +13,19 @@ RUN pip3 install -r requirements.txt --target ${LAMBDA_TASK_ROOT} -U --no-cache-
 
 # ARG AWS_ACCOUNT_ID
 ARG AWS_ACCESS_KEY_ID
-# ARG AWS_ECR_SECRET_ACCESS_KEY
+ARG AWS_SECRET_ACCESS_KEY
 ARG AWS_DEFAULT_REGION
+
+# Set environment variables for AWS credentials
+ENV AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+ENV AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+ENV AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
 
 RUN echo "here it is..."
 RUN echo $AWS_DEFAULT_REGION
 RUN echo "here it is...access key??"
 RUN echo $AWS_ACCESS_KEY_ID
+
 
 RUN echo "attempting s3 copy"
 RUN aws s3 cp s3://aws-scs-prod-bucket/prod/avrl/pickle/ ${LAMBDA_TASK_ROOT}
