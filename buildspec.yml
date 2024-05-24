@@ -1,5 +1,10 @@
 version: 0.2
 
+env:
+  secrets-manager:
+    AWS_ECR_ACCESS_KEY_ID: "AWS_ECR_Credentials:AWS_ECR_ACCESS_KEY_ID"
+    AWS_ECR_SECRET_ACCESS_KEY: "AWS_ECR_Credentials:AWS_ECR_SECRET_ACCESS_KEY"
+
 phases:
   pre_build:
     commands:
