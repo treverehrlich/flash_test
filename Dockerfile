@@ -30,8 +30,9 @@ COPY ./ ${LAMBDA_TASK_ROOT}
 # Get the latest model files from S3
 RUN aws s3 cp s3://aws-scs-prod-bucket/prod/avrl/pickle ${LAMBDA_TASK_ROOT}/.model_cache --recursive
 
-RUN ls -l
-RUN echo ls -l
+RUN ls -a
+RUN cd .model_cache
+RUN ls -a
 
 # Set the CMD to your handler (could also be done as a parameter override outside of the Dockerfile)
 CMD [ "app.handler" ]
