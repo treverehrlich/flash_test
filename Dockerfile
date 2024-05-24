@@ -8,8 +8,9 @@ ENV PYTHONUNBUFFERED True
 # Install the function's dependencies using file requirements.txt
 # from your project folder.
 RUN pip3 install --upgrade pip
-COPY requirements.txt . 
-RUN pip3 install -r requirements.txt --target ${LAMBDA_TASK_ROOT} -U --no-cache-dir --default-timeout=1000
+RUN pip3 install tensorflow
+#COPY requirements.txt . 
+#RUN pip3 install -r requirements.txt --target ${LAMBDA_TASK_ROOT} -U --no-cache-dir --default-timeout=1000
 
 
 # Copy project code
