@@ -23,11 +23,12 @@ ENV AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
 
 # RUN aws --version
 RUN echo "attempting s3 copy"
-RUN aws s3 cp s3://aws-scs-prod-bucket/prod/avrl/pickle ${LAMBDA_TASK_ROOT}
+RUN aws s3 cp s3://aws-scs-prod-bucket/prod/avrl/pickle ${LAMBDA_TASK_ROOT} --recursive
 RUN echo "I think we did it"
 
 COPY requirements.txt . 
 RUN pip3 install -r requirements.txt --target ${LAMBDA_TASK_ROOT} -U --no-cache-dir --default-timeout=1000
+
 
 
 
