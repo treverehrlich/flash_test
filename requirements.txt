@@ -1,3 +1,4 @@
+awscli
 fastapi
 mangum
 numpy
@@ -12,7 +13,6 @@ xlrd
 openpyxl
 beautifulsoup4
 O365
-awscli
 # ---------------------
 # fastapi==0.103.1
 # mangum==0.17.0
