@@ -5,11 +5,8 @@ FROM public.ecr.aws/lambda/python:3.10
 #Allow statements and logs messages to appear
 ENV PYTHONUNBUFFERED True
 
-# Install the function's dependencies using file requirements.txt
-# from your project folder.
 RUN pip3 install --upgrade pip
-
-#RUN pip3 install awscli
+RUN pip3 install awscli
 
 # ARG AWS_ACCOUNT_ID
 ARG AWS_ACCESS_KEY_ID
@@ -21,6 +18,9 @@ ENV AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
 ENV AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
 ENV AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
 
+# Install the function's dependencies using file requirements.txt
+# from your project folder.
+
 COPY requirements.txt . 
 RUN pip3 install -r requirements.txt --target ${LAMBDA_TASK_ROOT} -U --no-cache-dir --default-timeout=1000
 
@@ -30,9 +30,8 @@ COPY ./ ${LAMBDA_TASK_ROOT}
 # Get the latest model files from S3
 RUN aws s3 cp s3://aws-scs-prod-bucket/prod/avrl/pickle ${LAMBDA_TASK_ROOT}/.model_cache --recursive
 
-# Install codebase
-#RUN pip3 install --upgrade pip
-# RUN pip3 install -e codebase --target ${LAMBDA_TASK_ROOT} --no-cache-dir --default-timeout=1000
+RUN ls -l
+RUN echo ls -l
 
 # Set the CMD to your handler (could also be done as a parameter override outside of the Dockerfile)
 CMD [ "app.handler" ]
