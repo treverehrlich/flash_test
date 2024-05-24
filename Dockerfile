@@ -6,7 +6,7 @@ ENV PYTHONUNBUFFERED True
 RUN pip3 install --upgrade pip
 RUN pip3 install awscli
 
-# Set environment variables for AWS credentials
+# Set environment variables for AWS credentials 
 ARG AWS_ACCESS_KEY_ID
 ARG AWS_SECRET_ACCESS_KEY
 ARG AWS_DEFAULT_REGION
