@@ -16,12 +16,6 @@ ARG AWS_ACCESS_KEY_ID
 ARG AWS_SECRET_ACCESS_KEY
 ARG AWS_DEFAULT_REGION
 
-RUN echo "here it is..."
-RUN echo $AWS_DEFAULT_REGION
-RUN echo "here it is...access key??"
-RUN echo $AWS_ACCESS_KEY_ID
-RUN echo AWS_ACCESS_KEY_ID
-
 # Set environment variables for AWS credentials
 ENV AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
 ENV AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
@@ -29,7 +23,7 @@ ENV AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
 
 # RUN aws --version
 RUN echo "attempting s3 copy"
-RUN aws s3 cp s3://aws-scs-prod-bucket/prod/avrl/pickle/ ${LAMBDA_TASK_ROOT}
+RUN aws s3 cp s3://aws-scs-prod-bucket/prod/avrl/pickle ${LAMBDA_TASK_ROOT}
 RUN echo "I think we did it"
 
 COPY requirements.txt . 
