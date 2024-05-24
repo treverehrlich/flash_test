@@ -18,18 +18,11 @@ ARG AWS_DEFAULT_REGION
 
 RUN echo "here it is..."
 RUN echo ${AWS_ACCOUNT_ID}
+RUN echo $AWS_ACCOUNT_ID
 
-# Install AWS CLI
-RUN yum install -y python3 && \
-    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
-    unzip awscliv2.zip && \
-    ./aws/install
-
-# Set AWS credentials (replace placeholders with your actual AWS access key ID and secret access key)
-RUN aws configure set aws_access_key_id ${AWS_ECR_ACCESS_KEY_ID} && \
-    aws configure set aws_secret_access_key ${AWS_ECR_SECRET_ACCESS_KEY} && \
-    aws configure set region ${AWS_DEFAULT_REGION}
-
+RUN echo "attempting s3 copy"
+RUN aws s3 cp s3://aws-scs-prod-bucket/prod/avrl/pickle/ ${LAMBDA_TASK_ROOT}
+RUN echo "I think we did it"
 
 # Copy project code
 COPY ./ ${LAMBDA_TASK_ROOT}
