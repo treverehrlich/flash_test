@@ -25,7 +25,7 @@ RUN echo "here it is..."
 RUN echo $AWS_DEFAULT_REGION
 RUN echo "here it is...access key??"
 RUN echo $AWS_ACCESS_KEY_ID
-
+RUN echo AWS_ACCESS_KEY_ID
 
 RUN echo "attempting s3 copy"
 RUN aws s3 cp s3://aws-scs-prod-bucket/prod/avrl/pickle/ ${LAMBDA_TASK_ROOT}
