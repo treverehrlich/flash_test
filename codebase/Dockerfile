@@ -2,7 +2,7 @@ FROM 823367020558.dkr.ecr.us-east-1.amazonaws.com/codebase_base@sha256:00a6b5a3d
 
 ## DaVinci Codebase Install
 # Minimal files with requirements to cache pip install layer
-#COPY ./requirements.txt codebase/requirements.txt
+COPY ./requirements.txt codebase/requirements.txt
 COPY ./setup.py codebase/setup.py
 COPY ./README.md codebase/README.md
 RUN python3 -m pip install -e codebase
