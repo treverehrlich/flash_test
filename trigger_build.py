@@ -1,6 +1,5 @@
 import boto3
 from davinci.services.auth import get_secret
-from app_secrets import AVRL_API_KEY, AVRL_API_SANDBOX_KEY
 
 def get_CodeBuild_client():
     """
@@ -34,13 +33,11 @@ def get_CodeBuild_client():
     build = boto3.client(**boto3_login)
     return build
 
+client = get_CodeBuild_client() 
 
-print (AVRL_API_KEY)
-# client = get_CodeBuild_client() 
+# Start the build
+response = client.start_build(
+    projectName='flash_build',
+)
 
-# # Start the build
-# response = client.start_build(
-#     projectName='flash_build',
-# )
-
-# print(response)
+print(response)
