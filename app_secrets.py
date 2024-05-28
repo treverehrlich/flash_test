@@ -1,4 +1,7 @@
 import boto3
+import datetime
+from dateutil.tz import tzlocal
+import ast
 client = boto3.client('secretsmanager')
 
 #Sonar token
@@ -15,25 +18,24 @@ client = boto3.client('secretsmanager')
 # AVRL_API_KEY = 'o0kXae6x1kJjFtXn8T5CWlk88d7bxDuM' 
 # AVRL_API_SANDBOX_KEY = 'cllyiuaYNW5arTsIW6SL7HsXX4wR322g'
 
-
 try: 
     response = client.get_secret_value(
         SecretId='Flash_Secrets',
     )
 
-    print(response)
+    secret_str = ast.literal_eval(response['SecretString'])
 
-    SONAR_URL = response['SONAR_URL']
-    DAT_AUTH_URL = response['DAT_AUTH_URL']
-    DAT_ACCESS_URL = response['DAT_ACCESS_URL']
-    DAT_LKP_URL = response['DAT_LKP_URL']
-    EIA_URL = response['EIA_URL']
-    SONAR_TOKEN = response['SONAR_TOKEN']
-    DAT_USER = response['DAT_USER']
-    DAT_PWD = response['DAT_PWD']
-    DAT_API_USER = response['DAT_API_USER']
-    AVRL_API_KEY = response['AVRL_API_KEY']
-    AVRL_API_SANDBOX_KEY = response['AVRL_API_SANDBOX_KEY']
+    SONAR_URL = secret_str["SONAR_URL"]
+    DAT_AUTH_URL = secret_str['DAT_AUTH_URL']
+    DAT_ACCESS_URL = secret_str['DAT_ACCESS_URL']
+    DAT_LKP_URL = secret_str['DAT_LKP_URL']
+    EIA_URL = secret_str['EIA_URL']
+    SONAR_TOKEN = secret_str['SONAR_TOKEN']
+    DAT_USER = secret_str['DAT_USER']
+    DAT_PWD = secret_str['DAT_PWD']
+    DAT_API_USER = secret_str['DAT_API_USER']
+    AVRL_API_KEY = secret_str['AVRL_API_KEY']
+    AVRL_API_SANDBOX_KEY = secret_str['AVRL_API_SANDBOX_KEY']
 
 except Exception as e:
     print(f"An unknown error occurred: {str(e)}.")

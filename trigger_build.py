@@ -1,4 +1,5 @@
 import boto3
+import time
 from davinci.services.auth import get_secret
 
 def get_CodeBuild_client():
@@ -33,11 +34,41 @@ def get_CodeBuild_client():
     build = boto3.client(**boto3_login)
     return build
 
+def start_and_monitor_build(project_name):
+    # Start the build
+    response = client.start_build(projectName=project_name)
+    build_id = response['build']['id']
+    print(f'Started build with ID: {build_id}')
+
+    # Poll the build status
+    while True:
+        build_status = get_build_status(build_id)
+        print(f'Build status: {build_status}')
+        
+        if build_status in ['SUCCEEDED', 'FAILED', 'FAULT', 'STOPPED', 'TIMED_OUT']:
+            break
+        
+        # Wait before polling again
+        time.sleep(10)
+    
+    print(f'Build {build_status}')
+    return build_status
+
+def get_build_status(build_id):
+    # Get the build information
+    response = client.batch_get_builds(ids=[build_id])
+    
+    if 'builds' in response and response['builds']:
+        build = response['builds'][0]
+        return build['buildStatus']
+    else:
+        raise Exception('Build not found')
+
+
 client = get_CodeBuild_client() 
 
-# Start the build
-response = client.start_build(
-    projectName='flash_build',
-)
+### TODO: email if the build status is not SUCCEEDED!
 
-print(response)
+# Example usage
+project_name = 'flash_build'
+start_and_monitor_build(project_name)

@@ -22,8 +22,6 @@ RUN pip3 install -r requirements.txt --target ${LAMBDA_TASK_ROOT} -U --no-cache-
 # Copy project code
 COPY ./ ${LAMBDA_TASK_ROOT}
 
-RUN echo 'this is v2'
-
 # Install codebase
 RUN pip3 install -e codebase --target ${LAMBDA_TASK_ROOT} --no-cache-dir
 
