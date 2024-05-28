@@ -22,7 +22,7 @@ ENV AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
 # Copy project code
 COPY ./ ${LAMBDA_TASK_ROOT}
 
-RUN echo 'this is v1'
+RUN echo 'this is v2'
 
 # Install codebase
 RUN pip3 install -e codebase --target ${LAMBDA_TASK_ROOT} --no-cache-dir
