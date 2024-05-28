@@ -19,11 +19,11 @@ ENV AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
 COPY requirements.txt . 
 RUN pip3 install -r requirements.txt --target ${LAMBDA_TASK_ROOT} -U --no-cache-dir --default-timeout=1000
 
-# Install codebase
-RUN pip3 install -e codebase --target ${LAMBDA_TASK_ROOT} --no-cache-dir
-
 # Copy project code
 COPY ./ ${LAMBDA_TASK_ROOT}
+
+# Install codebase
+RUN pip3 install -e codebase --target ${LAMBDA_TASK_ROOT} --no-cache-dir
 
 # Get the latest model files from S3
 RUN aws s3 cp s3://aws-scs-prod-bucket/prod/avrl/pickle ${LAMBDA_TASK_ROOT}/.model_cache --recursive
