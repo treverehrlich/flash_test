@@ -16,8 +16,8 @@ ENV AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
 ENV AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
 
 # Install the function's dependencies using file requirements.txt
-#COPY requirements.txt . 
-#RUN pip3 install -r requirements.txt --target ${LAMBDA_TASK_ROOT} -U --no-cache-dir --default-timeout=1000
+COPY requirements.txt . 
+RUN pip3 install -r requirements.txt --target ${LAMBDA_TASK_ROOT} -U --no-cache-dir --default-timeout=1000
 
 # Copy project code
 COPY ./ ${LAMBDA_TASK_ROOT}
